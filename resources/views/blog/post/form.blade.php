@@ -4,8 +4,12 @@
 
 @section('content')
 <div class="row">
-   <h4 class="center">Faça login para continuar</h4>
+   <h5 class="center">Escreva seu post</h5>
 </div>
+
+@section('item1')
+    <a href="{{route('blog.index')}}">Voltar</a>
+@endsection
 
 @if($errors->all())
    @foreach ($errors->all() as $error)
@@ -14,23 +18,23 @@
 @endif
 <div class="row">
    <div class="container">
-      <form method="POST" action="{{route('blog.login.do')}}">
+      <form method="POST" action="{{route('post.store')}}">
          @csrf
+         <input type="hidden" name="user" value="{{Auth::user()->id}}">
          <div class="row">
             <div class="input-field">
-               <label for="email">Email</label>
-               <input type="text" name="email" id="email">
+               <label for="title">Titulo</label>
+               <input type="text" name="title" id="title">
             </div>
          </div>
          <div class="row">
             <div class="input-field">
-               <label for="password">Senha</label>
-               <input type="password" name="password" id="password">
+               <input type="text" name="content" id="content" data-length="255">
+                <label for="content">Conteudo</label>
             </div>
          </div>
          <div class="row center">
-            <input type="submit" class="btn grey darken-3" value="Logar">
-            <a href="{{route('blog.register')}}" class="btn grey darken-3">Registrar</a>
+            <input type="submit" class="btn grey darken-3" value="Postar">
          </div>
       </form>
    </div>

@@ -8,21 +8,10 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-
-    public function index()
-    {
-        $posts = Post::all();
-        foreach ($posts as $post) {
-            $user = User::where('id', $post->user)->first();
-            $post->user = $user->name;
-        }
-        return view('post.list', ['posts' => $posts]);
-    }
     
     public function create()
     {
-        $users = User::all();
-        return view('post.cad', ['users' => $users]);
+        return view('blog.post.form');
     }
 
     public function store(Request $request)
@@ -32,7 +21,7 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->user = $request->user;
         $post->save();
-        return redirect()->route('posts.index');
+        return redirect()->route('blog.index');
     }
 
     public function show(Post $post)
