@@ -19,3 +19,9 @@ Route::post('/blog/register/do', 'BlogController@register')->name('blog.register
 Route::get('/blog/post', 'PostController@create')->name('post.create');
 
 Route::post('/blog/post/store', 'PostController@store')->name('post.store');
+
+Route::get('/blog/profile', 'BlogController@profile')->name('blog.profile');
+
+Route::get('/blog/user/', 'BlogController@user')->name('blog.user');
+
+Route::post('/blog/user/do', 'BlogController@userUpdate')->name('blog.user.do');

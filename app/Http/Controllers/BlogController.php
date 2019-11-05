@@ -61,5 +61,24 @@ class BlogController extends Controller
         $user->save();
         return redirect()->route('blog.index');
     }
+
+    public function profile(){
+        return view('blog.profile');
+    }
+
+    public function user(){
+        return view('blog.user');
+    }
+
+    public function userUpdate(Request $request){
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if(!empty($request->password)){
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        return redirect()->route('blog.index');
+    }
     
 }

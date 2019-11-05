@@ -15,7 +15,7 @@
 
 @section('item1')<a href="{{route('post.create')}}">Criar post</a>@endsection
 
-@section('item2')<a href="#">Perfil</a>@endsection
+@section('item2')<a href="{{route('blog.profile')}}">Perfil</a>@endsection
 
 @section('item3') 
     <form method="POST" id="form" action="{{route('blog.logout')}}">
