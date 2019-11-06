@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,39 +17,39 @@ class UserController extends Controller
 
     public function create()
     {
-        //
+        return view('blog.user.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect()->route('blog.index');
     }
 
     public function show($id)
     {
-        $user = User::where('id', $id)->first();
-        if($user){
-            echo "<h1>Usuário {$user->name}</h1>";
-            echo "<p>Email : {$user->email}</p>";
-            echo "<h1>Posts</h1>";
-            $posts = $user->posts;
-            if($posts){
-                foreach ($posts as $post) {
-                    echo "<li>{$post->title}</li>";
-                }
-            }
-        }else{
-            echo "<h1>Usuário não encontrado</h1>";
+
+    }
+
+    public function edit()
+    {
+        return view('blog.user.edit');
+    }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if(!empty($request->password)){
+            $user->password = Hash::make($request->password);
         }
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
+        $user->save();
+        return redirect()->route('blog.index');
     }
 
     public function destroy($id)

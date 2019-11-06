@@ -2,24 +2,30 @@
 
 @section('title') Blog @endsection
 
+@section('item1')<a href="{{route('blog.profile')}}">Voltar</a>@endsection
+
 @section('content')
-<div class="row">
-   <h4 class="center">Faça login para continuar</h4>
-</div>
 
 @if($errors->all())
    @foreach ($errors->all() as $error)
-       <h5 class="center red-text">{{$error}}</h5>
+       <h5>{{$error}}</h5>
    @endforeach
 @endif
 <div class="row">
    <div class="container">
-      <form method="POST" action="{{route('blog.login.do')}}">
+      <form method="POST" action="{{route('user.update')}}">
          @csrf
+         @method('put')
+         <div class="row">
+            <div class="input-field">
+               <label for="name">Nome</label>
+               <input value="{{Auth::user()->name}}" type="text" name="name" id="name">
+            </div>
+         </div>
          <div class="row">
             <div class="input-field">
                <label for="email">Email</label>
-               <input type="text" name="email" id="email">
+               <input value="{{Auth::user()->email}}" type="text" name="email" id="email">
             </div>
          </div>
          <div class="row">
@@ -29,11 +35,9 @@
             </div>
          </div>
          <div class="row center">
-            <input type="submit" class="btn grey darken-3" value="Logar">
-            <a href="{{route('user.create')}}" class="btn grey darken-3">Registrar</a>
+            <input type="submit" class="btn grey darken-3" value="Registrar">
          </div>
       </form>
    </div>
 </div>
-
 @endsection

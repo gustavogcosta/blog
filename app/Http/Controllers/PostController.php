@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+        $posts = Post::all();
+        foreach ($posts as $post) {
+            $user = User::where('id', $post->user)->first();
+            $post->user = $user->name;
+        }
+        return view('blog.home', [
+            "posts" => $posts
+        ]);
+    }
     
     public function create()
     {
-        return view('blog.post.form');
+        return view('blog.post.create');
     }
 
     public function store(Request $request)
@@ -24,27 +36,25 @@ class PostController extends Controller
         return redirect()->route('blog.index');
     }
 
-    public function show(Post $post)
+    public function show()
     {
-        $user = User::where('id', $post->user)->first();
-        $post->user = $user->name;
-        return $post;
+        $user = Auth::user();
+        $posts = Post::where('user', $user->id)->get();
+        return view('blog.post.show', ['posts' => $posts]);
     }
 
     public function edit(Post $post)
     {
-        $users = User::all();
-        return view('post.att', ["post" => $post, "users" => $users]);
+        return view('blog.post.edit', ["post" => $post]);
     }   
 
     public function update(Request $request, Post $post)
     {
-        $post->id = $request->id;
         $post->title = $request->title;
         $post->content = $request->content;
-        $post->user = $request->user;
+        $post->user = Auth::user()->id;
         $post->save();
-        return redirect()->route('posts.index');
+        return redirect()->route('post.show');
         
     }
 

@@ -2,24 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class BlogController extends Controller
 {
     public function index(){
         if(Auth::check()){
-            $posts = Post::all();
-            foreach ($posts as $post) {
-                $user = User::where('id', $post->user)->first();
-                $post->user = $user->name;
-            }
-            return view('blog.index', [
-                "posts" => $posts
-            ]);
+            return redirect()->route('post.index');
         }else{
             return redirect()->route('blog.login');
         }
@@ -40,7 +30,6 @@ class BlogController extends Controller
         if(Auth::attempt($credential)){
             return redirect()->route('blog.index');
         }
-
         return redirect()->back()->withInput()->withErrors("Dados não conferem!");
     }
 
@@ -49,36 +38,8 @@ class BlogController extends Controller
         return redirect()->route('blog.index');
     }
 
-    public function formRegister(){
-        return view('blog.register');
-    }
-
-    public function register(Request $request){
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-        return redirect()->route('blog.index');
-    }
-
     public function profile(){
         return view('blog.profile');
-    }
-
-    public function user(){
-        return view('blog.user');
-    }
-
-    public function userUpdate(Request $request){
-        $user = Auth::user();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        if(!empty($request->password)){
-            $user->password = Hash::make($request->password);
-        }
-        $user->save();
-        return redirect()->route('blog.index');
     }
     
 }
