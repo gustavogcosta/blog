@@ -34,5 +34,8 @@
             </div>
         </div>
     @endforeach
+    <footer>
+        {{$posts->links()}}
+    </footer>
 </div>
 @endsection

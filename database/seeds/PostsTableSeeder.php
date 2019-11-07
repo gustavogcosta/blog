@@ -13,9 +13,19 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
         Post::create([
-            'title' => "Um post de Teste",
+            'title' => "Vida no Campo",
             'content' => "Esse é um post de teste criado junto com as migrations do Laravel essa coisa linda do PHP",
             'user' => '1'
+        ]);
+        Post::create([
+            'title' => "Vida na Cidade",
+            'content' => "Esse é um post de teste criado junto com as migrations do Laravel essa coisa linda do PHP",
+            'user' => '2'
+        ]);
+        Post::create([
+            'title' => "Como fazer salpicão",
+            'content' => "Esse é um post de teste criado junto com as migrations do Laravel essa coisa linda do PHP",
+            'user' => '3'
         ]);
     }
 }

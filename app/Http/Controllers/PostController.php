@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::where('id', '>', 1)->paginate(3);
         foreach ($posts as $post) {
             $user = User::where('id', $post->user)->first();
             $post->user = $user->name;
@@ -29,7 +29,13 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = new Post;
+        if(strlen($request->title) > 50){
+            return redirect()->back()->withInput()->withErrors("Limite excessivo de caracteres no titulo!");
+        }    
         $post->title = $request->title;
+        if(strlen($request->content) > 255){
+            return redirect()->back()->withInput()->withErrors("Limite excessivo de caracteres no conteudo!");
+        };
         $post->content = $request->content;
         $post->user = $request->user;
         $post->save();
@@ -39,7 +45,7 @@ class PostController extends Controller
     public function show()
     {
         $user = Auth::user();
-        $posts = Post::where('user', $user->id)->get();
+        $posts = Post::where('user', $user->id)->paginate(2);
         return view('blog.post.show', ['posts' => $posts]);
     }
 
@@ -50,7 +56,13 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
+        if(strlen($request->title) > 50){
+            return redirect()->back()->withInput()->withErrors("Limite excessivo de caracteres no titulo!");
+        }    
         $post->title = $request->title;
+        if(strlen($request->content) > 255){
+            return redirect()->back()->withInput()->withErrors("Limite excessivo de caracteres no conteudo!");
+        };
         $post->content = $request->content;
         $post->user = Auth::user()->id;
         $post->save();
@@ -61,6 +73,21 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('blog.home');
+        return redirect()->route('blog.post.show');
+    }
+
+    public function formFind(){
+        return view('blog.post.find');
+    }
+
+    public function find(Request $request){
+        $posts = Post::where($request->filtro, 'LIKE', '%'.$request->keyword.'%')->paginate(2);        
+        foreach ($posts as $post) {
+            $user = User::where('id', $post->user)->first();
+            $post->user = $user->name;
+        }
+        return view('blog.post.result', [
+            "posts" => $posts
+        ]);
     }
 }

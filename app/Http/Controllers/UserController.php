@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    public function index()
-    {
-
-    }
-
     public function create()
     {
         return view('blog.user.create');
@@ -23,16 +18,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User;
-        $user->name = $request->name;
+        if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)){
+            return redirect()->back()->withInput()->withErrors("Email invalido!");
+        }        
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
         return redirect()->route('blog.home');
-    }
-
-    public function show($id)
-    {
-
     }
 
     public function edit()
@@ -44,16 +36,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user->name = $request->name;
-        $user->email = $request->email;
+        if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)){
+            return redirect()->back()->withInput()->withErrors("Email invalido!");
+        }        
+        $user->email = $request->email;        
         if(!empty($request->password)){
             $user->password = Hash::make($request->password);
         }
         $user->save();
         return redirect()->route('blog.home');
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }

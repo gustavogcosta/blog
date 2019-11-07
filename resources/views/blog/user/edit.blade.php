@@ -8,7 +8,6 @@
    @endforeach
 @endif
 
-
 <div class="row">
    <div class="container">
       <form method="POST" action="{{route('user.update')}}">

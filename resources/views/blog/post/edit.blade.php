@@ -4,12 +4,12 @@
 
 <h5 class="center">Edite seu post</h5>
 
-
 @if($errors->all())
    @foreach ($errors->all() as $error)
        <h5 class="center red-text">{{$error}}</h5>
    @endforeach
 @endif
+
 <div class="row">
    <div class="container">
       <form method="POST" action="{{route('post.update', $post)}}">

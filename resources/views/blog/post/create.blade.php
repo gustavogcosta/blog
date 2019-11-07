@@ -15,13 +15,27 @@
       <div class="row">
          <div class="input-field">
             <label for="title">Titulo</label>
-            <input type="text" name="title" id="title">
+            <input 
+            required
+            type="text" 
+            name="title" 
+            id="title"
+            class="validate"
+            maxlength="50"
+            data-length="50">
          </div>
       </div>
       <div class="row">
          <div class="input-field">
-            <input type="text" name="content" id="content" data-length="255">
-               <label for="content">Conteudo</label>
+            <label for="content">Conteudo</label>
+            <input 
+            type="text" 
+            required 
+            name="content" 
+            id="content" 
+            class="validate"  
+            maxlength="255"
+            data-length="50">
          </div>
       </div>
       <div class="row center">
@@ -29,5 +43,4 @@
       </div>
    </form>
 </div>
-
 @endsection
