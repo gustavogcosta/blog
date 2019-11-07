@@ -30,7 +30,7 @@
          </div>
          <div class="row center">
             <input type="submit" class="btn grey darken-3" value="Logar">
-            <a href="{{route('user.create')}}" class="btn grey darken-3">Registrar</a>
+            <a href="{{route('blog.user.create')}}" class="btn grey darken-3">Registrar</a>
          </div>
       </form>
    </div>

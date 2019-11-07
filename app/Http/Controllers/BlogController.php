@@ -9,7 +9,7 @@ class BlogController extends Controller
 {
     public function index(){
         if(Auth::check()){
-            return redirect()->route('post.index');
+            return redirect()->route('blog.home');
         }else{
             return redirect()->route('blog.login');
         }
@@ -28,18 +28,14 @@ class BlogController extends Controller
             'password' => $request->password
         ];
         if(Auth::attempt($credential)){
-            return redirect()->route('blog.index');
+            return redirect()->route('blog.home');
         }
         return redirect()->back()->withInput()->withErrors("Dados não conferem!");
     }
 
     public function logout(){
         Auth::logout();
-        return redirect()->route('blog.index');
-    }
-
-    public function profile(){
-        return view('blog.profile');
+        return redirect()->route('blog.login');
     }
     
 }

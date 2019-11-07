@@ -1,15 +1,9 @@
 @extends('template')
 
-@section('title') Blog @endsection
-
 @section('content')
-<div class="row">
-   <h5 class="center">Edite seu post</h5>
-</div>
 
-@section('item1')
-    <a href="{{route('post.show')}}">Voltar</a>
-@endsection
+<h5 class="center">Edite seu post</h5>
+
 
 @if($errors->all())
    @foreach ($errors->all() as $error)

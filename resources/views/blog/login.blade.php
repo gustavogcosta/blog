@@ -1,17 +1,15 @@
 @extends('template')
 
-@section('title') Blog @endsection
-
 @section('content')
-<div class="row">
-   <h4 class="center">Faça login para continuar</h4>
-</div>
+
+<h4 class="center">Faça login para continuar</h4>
 
 @if($errors->all())
    @foreach ($errors->all() as $error)
        <h5 class="center red-text">{{$error}}</h5>
    @endforeach
 @endif
+
 <div class="row">
    <div class="container">
       <form method="POST" action="{{route('blog.login.do')}}">
@@ -30,7 +28,7 @@
          </div>
          <div class="row center">
             <input type="submit" class="btn grey darken-3" value="Logar">
-            <a href="{{route('user.create')}}" class="btn grey darken-3">Registrar</a>
+            <a href="{{route('blog.user.create')}}" class="btn grey darken-3">Registrar</a>
          </div>
       </form>
    </div>

@@ -33,7 +33,7 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->user = $request->user;
         $post->save();
-        return redirect()->route('blog.index');
+        return redirect()->route('blog.home');
     }
 
     public function show()
@@ -54,13 +54,13 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->user = Auth::user()->id;
         $post->save();
-        return redirect()->route('post.show');
+        return redirect()->route('blog.post.show');
         
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('posts.index');
+        return redirect()->route('blog.home');
     }
 }

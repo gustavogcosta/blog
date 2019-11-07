@@ -27,7 +27,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        return redirect()->route('blog.index');
+        return redirect()->route('blog.home');
     }
 
     public function show($id)
@@ -49,7 +49,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
         }
         $user->save();
-        return redirect()->route('blog.index');
+        return redirect()->route('blog.home');
     }
 
     public function destroy($id)

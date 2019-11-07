@@ -1,9 +1,5 @@
 @extends('template')
 
-@section('title') Blog @endsection
-
-@section('item1')<a href="{{route('blog.profile')}}">Voltar</a>@endsection
-
 @section('content')
 
 @if($errors->all())
@@ -11,6 +7,8 @@
        <h5>{{$error}}</h5>
    @endforeach
 @endif
+
+
 <div class="row">
    <div class="container">
       <form method="POST" action="{{route('user.update')}}">
@@ -40,4 +38,5 @@
       </form>
    </div>
 </div>
+
 @endsection
