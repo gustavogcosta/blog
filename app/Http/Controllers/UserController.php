@@ -22,6 +22,7 @@ class UserController extends Controller
             return redirect()->back()->withInput()->withErrors("Email invalido!");
         }        
         $user->email = $request->email;
+        $user->name = $request->name;
         $user->password = Hash::make($request->password);
         $user->save();
         return redirect()->route('blog.home');

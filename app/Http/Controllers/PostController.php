@@ -66,28 +66,12 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->user = Auth::user()->id;
         $post->save();
-        return redirect()->route('blog.post.show');
-        
+        return redirect()->route('post.show');
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('blog.post.show');
-    }
-
-    public function formFind(){
-        return view('blog.post.find');
-    }
-
-    public function find(Request $request){
-        $posts = Post::where($request->filtro, 'LIKE', '%'.$request->keyword.'%')->paginate(2);        
-        foreach ($posts as $post) {
-            $user = User::where('id', $post->user)->first();
-            $post->user = $user->name;
-        }
-        return view('blog.post.result', [
-            "posts" => $posts
-        ]);
+        return redirect()->route('post.show');
     }
 }

@@ -6,10 +6,10 @@
         <div class="col s12">
             <div class="card grey darken-3">
                 <div class="card-content white-text">
-                    <span class="card-title">Nenhum post encontrado!</span>
+                    <span class="card-title">Opa voce ainda não escreveu nenhum post!</span>
                 </div>
                 <div class="card-action">
-                    <a href="{{route('blog.post.create')}}">Escreva um agora</a>
+                    <a href="{{route('post.write')}}">Escreva um agora</a>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-action white-text">
                     <form method="POST" id="form" action="{{route('post.destroy', $post)}}">
-                        <a href="{{route('blog.post.edit', $post->id)}}" class="btn grey darken-3 z-depth-0 white-text">Editar</a>
+                        <a href="{{route('post.edit', $post)}}" class="btn grey darken-3 z-depth-0 white-text">Editar</a>
                         @csrf
                         @method('DELETE')
                         <input type="submit" class="btn grey darken-3 z-depth-0 white-text" value="Deletar">
