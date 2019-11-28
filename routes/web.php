@@ -14,7 +14,7 @@ Route::prefix('blog')->group(function() {
    Route::delete('/posts/destroy/{post}', 'PostController@destroy')->name('post.destroy')->middleware('auth');
    Route::get('/login', 'BlogController@formLogin')->name('blog.login');
    Route::post('/login/do', 'BlogController@login')->name('blog.login.do');
-   Route::post('/logout', 'BlogController@logout')->name('blog.logout')->middleware('auth');
+   Route::get('/logout', 'BlogController@logout')->name('blog.logout')->middleware('auth');
    Route::get('/register', 'UserController@create')->name('user.create');
    Route::post('/register/do', 'UserController@store')->name('user.store');
    Route::get('/user', 'UserController@edit')->name('user.edit')->middleware('auth');

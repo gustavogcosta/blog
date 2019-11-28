@@ -1,37 +1,27 @@
 @extends('template')
 
 @section('content')
-
-<h4 class="center">Faça login para continuar</h4>
-
-@if($errors->all())
-   @foreach ($errors->all() as $error)
-       <h5 class="center red-text">{{$error}}</h5>
-   @endforeach
-@endif
-
-<div class="row">
    <div class="container">
       <form method="POST" action="{{route('blog.login.do')}}">
          @csrf
-         <div class="row">
-            <div class="input-field">
+         <div class="row justify-content-center">
+            <div class="form-group col-sm-8 col-lg-4">
                <label for="email">Email</label>
-               <input type="text" name="email" id="email">
+               <input type="text" class="form-control" name="email" id="email">
             </div>
          </div>
-         <div class="row">
-            <div class="input-field">
+         <div class="row justify-content-center">
+            <div class="form-group col-sm-8 col-lg-4">
                <label for="password">Senha</label>
-               <input type="password" name="password" id="password">
+               <input type="password" class="form-control" name="password" id="password">
             </div>
          </div>
-         <div class="row center">
-            <input type="submit" class="btn grey darken-3" value="Logar">
-            <a href="{{route('user.create')}}" class="btn grey darken-3">Registrar</a>
+         <div class="row justify-content-center">
+            <div class="col-sm-8 col-lg-4">
+               <input type="submit" style="width: 100px;" class="btn btn-primary" value="Logar">
+               <a href="{{route('user.create')}}" style="width: 100px;" class="btn btn-primary">Registrar</a>
+            </div>
          </div>
       </form>
    </div>
-</div>
-
 @endsection
