@@ -1,37 +1,28 @@
-@extends('template')
+@extends('blog.layouts.template')
 
 @section('content')
-
-<h5 class="center">Edite seu post</h5>
-
-@if($errors->all())
-   @foreach ($errors->all() as $error)
-       <h5 class="center red-text">{{$error}}</h5>
-   @endforeach
-@endif
-
-<div class="row">
    <div class="container">
       <form method="POST" action="{{route('post.update', $post)}}">
-        @csrf
-        @method('put')
-         <div class="row">
-            <div class="input-field">
+         @csrf
+         @method('PUT')
+         <div class="row justify-content-center">
+            <div class="form-group col-sm-8 col-lg-4">
                <label for="title">Titulo</label>
-               <input type="text" name="title" value="{{$post->title}}" id="title">
+               <input type="text" value="{{$post->title}}" class="form-control" name="title" id="title">
             </div>
          </div>
-         <div class="row">
-            <div class="input-field">
-               <input type="text" value="{{$post->content}}" name="content" id="content" data-length="255">
-                <label for="content">Conteudo</label>
+         <div class="row justify-content-center">
+            <div class="form-group col-sm-8 col-lg-4">
+               <label for="content">Texto</label>
+               <input type="text" value="{{$post->content}}" class="form-control" name="content" id="content">
             </div>
          </div>
-         <div class="row center">
-            <input type="submit" class="btn grey darken-3" value="Editar">
+         <div class="row justify-content-center">
+            <div class="col-sm-8 col-lg-4">
+               <input type="submit" style="width: 100px;" class="btn btn-dark" value="Editar">
+               <a href="{{route('post.show')}}" class="btn btn-dark">Voltar</a>
+            </div>
          </div>
       </form>
    </div>
-</div>
-
 @endsection

@@ -1,41 +1,44 @@
-@extends('template')
+@extends('blog.layouts.template')
 
 @section('content')
-<div class="row container">
+<div class="container">
     @if(count($posts) === 0)
-        <div class="col s12">
-            <div class="card grey darken-3">
-                <div class="card-content white-text">
-                    <span class="card-title">Opa voce ainda não escreveu nenhum post!</span>
-                </div>
-                <div class="card-action">
-                    <a href="{{route('post.write')}}">Escreva um agora</a>
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Ops voce ainda não tem posts!</h2>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{route('post.write')}}">Crie um agora!</a>
+                    </div>
                 </div>
             </div>
         </div>
     @endif
     @foreach ($posts as $post)
         <div class="row">
-            <div class="col s12">
-                <div class="card grey darken-3">
-                    <div class="card-content white-text">
-                    <span class="card-title">{{$post->title}}</span>
-                    <p>{{$post->content}}</p>
+            <div class="col-md-12 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                    <h2 class="card-title">{{$post->title}}</h2>
+                    <p class="card-text">{{$post->content}}</p>
                     </div>
-                    <div class="card-action white-text">
+                    <div class="card-footer">
                     <form method="POST" id="form" action="{{route('post.destroy', $post)}}">
-                        <a href="{{route('post.edit', $post)}}" class="btn grey darken-3 z-depth-0 white-text">Editar</a>
+                        <a href="{{route('post.edit', $post)}}" class="btn btn-dark">Editar</a>
                         @csrf
                         @method('DELETE')
-                        <input type="submit" class="btn grey darken-3 z-depth-0 white-text" value="Deletar">
+                        <input type="submit" class="btn btn-dark" value="Deletar">
                     </form>
                     </div>
                 </div>
             </div>
         </div>
     @endforeach
-    <footer>
+    <footer class="fixed-bottom">
         {{$posts->links()}}
     </footer>
 </div>
 @endsection
+

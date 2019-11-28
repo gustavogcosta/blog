@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="{{asset('blog/css/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/styles.css')}}" rel="stylesheet">
     <title>Blog</title>
     <style>
         body {
@@ -25,16 +25,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item @php echo (Route::getCurrentRoute()->uri == 'blog/home') ? 'active' : ''; @endphp">
                     <a class="nav-link" href="{{route('blog.home')}}">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item @php echo (Route::getCurrentRoute()->uri == 'blog/write') ? 'active' : ''; @endphp">
                     <a class="nav-link" href="{{route('post.write')}}">Escrever</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item @php echo (Route::getCurrentRoute()->uri == 'blog/posts') ? 'active' : ''; @endphp">
                     <a class="nav-link" href="{{route('post.show')}}">Seus Posts</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item @php echo (Route::getCurrentRoute()->uri == 'blog/user') ? 'active' : ''; @endphp">
                     <a class="nav-link" href="{{route('user.edit')}}">Perfil</a>
                 </li>
                 <li class="nav-item">
@@ -48,7 +48,8 @@
         
     @yield('content')
     
-    <script src="{{asset('blog/js/jquery.js')}}"></script>
-    <script src="{{asset('blog/js/bootstrap.js')}}"></script>
+    <script src="{{asset('/js/jquery.js')}}"></script>
+    <script src="{{asset('/js/bootstrap.js')}}"></script>
+    
 </body>
 </html>

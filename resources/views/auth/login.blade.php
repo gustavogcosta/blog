@@ -1,4 +1,4 @@
-@extends('template')
+@extends('blog.layouts.template')
 
 @section('content')
    <div class="container">
@@ -18,8 +18,8 @@
          </div>
          <div class="row justify-content-center">
             <div class="col-sm-8 col-lg-4">
-               <input type="submit" style="width: 100px;" class="btn btn-primary" value="Logar">
-               <a href="{{route('user.create')}}" style="width: 100px;" class="btn btn-primary">Registrar</a>
+               <input type="submit" style="width: 100px;" class="btn btn-dark" value="Logar">
+               <a href="{{route('user.create')}}" style="width: 100px;" class="btn btn-dark">Registrar</a>
             </div>
          </div>
       </form>
